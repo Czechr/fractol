@@ -1,28 +1,15 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: czak </var/mail/czak>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/05 01:30:29 by czak              #+#    #+#             */
-/*   Updated: 2021/12/19 19:54:39 by czak             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "fract_ol.h"
 
-t_data	init(int add)
+t_data	init(int address)
 {
 	t_data	img;
 
 	img.zoom = 4;
-	img.a = 0;
-	img.b = 0;
 	img.mlx = mlx_init();
-	img.mlx_win = mlx_new_window(img.mlx, W_WIDTH, W_HEIGHT, "Fract-ol");
-	img.img = mlx_new_image(img.mlx, W_WIDTH, W_HEIGHT);
-	img.addr = (int *)mlx_get_data_addr(img.img, &add, &add, &add);
+	img.mlx_win = mlx_new_window(img.mlx, W, H, "Fract-ol");
+	img.img = mlx_new_image(img.mlx, W, H);
+	img.addr = (int *)mlx_get_data_addr(img.img, &address, &address, &address);
 	return (img);
 }
 
@@ -59,10 +46,10 @@ int	check(int argc, char **argv, t_data *img)
 	if (ft_strcmp(argv[1], "Julia"))
 	{
 		if (argc != 3 || ft_strlen(argv[2]) != 1
-			|| argv[2][0] >= '5' || argv[2][0] <= '0')
+			|| argv[2][0] >= '3' || argv[2][0] <= '0')
 			return (0);
 		img->type = 1;
-		img->julia = argv[2][0] - 48;
+		img->julia_set = argv[2][0] - 48;
 	}
 	else if (ft_strcmp(argv[1], "Mandelbrot"))
 	{
